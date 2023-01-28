@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.hardware
 
-import org.firstinspires.ftc.teamcode.ShreyOp
-
 class ActuationConstants {
     object LiftConstants {
         const val IDLE = 80

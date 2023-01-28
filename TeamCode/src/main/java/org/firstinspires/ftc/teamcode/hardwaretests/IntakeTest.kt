@@ -9,40 +9,64 @@ import org.firstinspires.ftc.teamcode.drive.GamepadEventPS
 
 @TeleOp(name = "Intake Test")
 class IntakeTest : OpMode() {
-    private lateinit var left: CRServo
-    private lateinit var right: CRServo
+    private lateinit var leftExtension: Servo
+    private lateinit var rightExtension: Servo
+
+    private lateinit var rightArm: Servo
+    private lateinit var leftArm: Servo
+
+    private lateinit var claw: Servo
 
     private lateinit var gamepadEvent: GamepadEventPS
 
     override fun init() {
-        left = hardwareMap.crservo.get("leftservo")
-        right = hardwareMap.crservo.get("rightservo")
+        leftExtension = hardwareMap.servo.get("leftExtension")
+        rightExtension = hardwareMap.servo.get("rightExtension")
 
-//        lift.targetPosition = 0
-//        lift.power = 1.0
-//        lift.mode = DcMotor.RunMode.RUN_TO_POSITION
-//        lift.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
+        leftExtension.position = 0.0
+        rightExtension.position = 1.0
+
+        leftArm = hardwareMap.servo.get("leftArm")
+        rightArm = hardwareMap.servo.get("rightArm")
+
+        leftArm.position = 0.0
+        rightArm.position = 1.0
+
+        claw = hardwareMap.servo.get("claw")
+
+        claw.position = 0.0
 
         gamepadEvent = GamepadEventPS(gamepad1)
-
         telemetry.addLine("Initialized")
     }
 
     override fun loop() {
-        if(gamepad1.dpad_up) {
-            left.power = -1.0
-            right.power = 1.0
+        if (gamepadEvent.dPadUp()) {
+            leftExtension.position -= 0.05
+            rightExtension.position += 0.05
         }
-        else if(gamepad1.dpad_down) {
-            left.power = 1.0
-            right.power = -1.0
-        } else {
-            left.power = 0.0
-            right.power = 0.0
+        if (gamepadEvent.dPadDown()) {
+            leftExtension.position += 0.05
+            rightExtension.position -= 0.05
         }
 
-        telemetry.addData("Right Current power: ", right.power)
-        telemetry.addData("Left Current power: ", left.power)
+        if (gamepadEvent.triangle()) {
+            leftArm.position -= 0.05
+            rightArm.position += 0.05
+        }
+
+        if (gamepadEvent.dPadRight()) {
+            claw.position += 0.05
+        }
+        if (gamepadEvent.dPadLeft()) {
+            claw.position -= 0.05
+        }
+
+        telemetry.addData("Left Extension Position", leftExtension.position)
+        telemetry.addData("Right Extension Position", rightExtension.position)
+        telemetry.addData("Left Arm Position", leftArm.position)
+        telemetry.addData("Right Arm Position", rightArm.position)
+        telemetry.addData("Claw Position", claw.position)
         telemetry.update()
     }
 }
