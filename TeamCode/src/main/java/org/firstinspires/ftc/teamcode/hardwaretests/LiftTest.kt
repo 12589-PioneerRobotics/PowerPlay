@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.hardwaretests
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import com.qualcomm.robotcore.hardware.CRServo
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorEx
 import com.qualcomm.robotcore.hardware.Servo
@@ -13,16 +14,18 @@ class LiftTest : OpMode() {
     private lateinit var lift: DcMotorEx
     private lateinit var claw: Servo
 
+    private lateinit var test: CRServo
+
     private lateinit var gamepadEvent: GamepadEventPS
 
     override fun init() {
         lift = hardwareMap.dcMotor.get("lift") as DcMotorEx
         claw = hardwareMap.servo.get("claw")
 
-//        lift.targetPosition = 0
-//        lift.power = 1.0
-//        lift.mode = DcMotor.RunMode.RUN_TO_POSITION
-//        lift.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
+        lift.targetPosition = 0
+        lift.power = 1.0
+        lift.mode = DcMotor.RunMode.RUN_TO_POSITION
+        lift.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
 
         claw.position = 1.0
 

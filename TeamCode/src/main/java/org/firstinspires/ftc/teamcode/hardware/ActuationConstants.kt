@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.hardware
 
 class ActuationConstants {
     object LiftConstants {
-        const val IDLE = 80
+        const val IDLE = 780
         const val FIRST_LEVEL = 2145
         const val SECOND_LEVEL = 3450
         const val THIRD_LEVEL = 4800

@@ -5,15 +5,13 @@ import com.outoftheboxrobotics.photoncore.PhotonCore
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
-import com.qualcomm.robotcore.hardware.Gamepad
 import org.firstinspires.ftc.teamcode.drive.GamepadEventPS
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive
-import org.firstinspires.ftc.teamcode.hardware.ActuationConstants
 import org.firstinspires.ftc.teamcode.hardware.Lift
 import org.firstinspires.ftc.teamcode.hardware.Profiles
 
-@TeleOp(name = "ShreyOp")
-class ShreyOp : OpMode() {
+@TeleOp(name = "ShreyOp Rush")
+class ShreyOpRush : OpMode() {
     private lateinit var drive: SampleMecanumDrive
     private lateinit var lift: Lift
     private lateinit var profiles: Profiles
@@ -60,14 +58,6 @@ class ShreyOp : OpMode() {
         }
 
         //profiles.defaultProfile(lift, gamepadEvent1.dPadLeft(), gamepadEvent1.dPadDown(), gamepadEvent1.dPadRight(), gamepadEvent1.dPadUp(), gamepad1.left_trigger, gamepad1.right_trigger, gamepadEvent1.rightBumper())
-        profiles.experimentalProfile(lift, gamepadEvent1.rightStickButton(), gamepadEvent1.leftBumper(), gamepadEvent1.rightBumper(), gamepad1.left_trigger, gamepad1.right_trigger)
-
-        telemetry.addData("Lift Position: ", lift.lift.currentPosition)
-        telemetry.addData("Claw Position: ", lift.claw.position)
-        telemetry.addData("Claw State: ", lift.clawState)
-        telemetry.addData("Level Presses: ", profiles.presses)
-        telemetry.addData("Slow Mode: ", slowMode)
-        telemetry.addData("Position: ", drive.poseEstimate)
-        telemetry.update()
+        profiles.experimentalProfile(lift, gamepadEvent1.rightStickButton(), gamepadEvent1.leftBumper(), gamepadEvent1.rightBumper(), gamepad1.left_trigger, gamepad1.right_trigger, gamepadEvent1.cross())
     }
 }

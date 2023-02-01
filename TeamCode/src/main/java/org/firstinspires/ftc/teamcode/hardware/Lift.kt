@@ -6,6 +6,8 @@ import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry
 class Lift (hardwareMap: HardwareMap) {
     lateinit var lift: DcMotorEx
     lateinit var claw: Servo
+//    lateinit var armLeft: Servo
+//    lateinit var armRight: Servo
     lateinit var clawState: ClawState
 
     init {
@@ -22,10 +24,20 @@ class Lift (hardwareMap: HardwareMap) {
             claw.position = ActuationConstants.ClawConstants.OPEN
             clawState = ClawState.OPEN
         }
+
+//        if (hardwareMap.servo.contains("armLeft")) {
+//            armLeft = hardwareMap.servo.get("armLeft")
+//        }
+//        if (hardwareMap.servo.contains("armRight")) {
+//            armRight = hardwareMap.servo.get("armRight")
+//        }
     }
 
     fun setLiftPosition(position: Int) {
+        if (position < lift.targetPosition)
+            lift.power = 0.5
         lift.targetPosition = position
+        lift.power = 1.0
     }
 
     fun raiseLift(increment: Int) {
@@ -33,7 +45,9 @@ class Lift (hardwareMap: HardwareMap) {
     }
 
     fun lowerLift(increment: Int) {
+        lift.power = 0.5
         lift.targetPosition -= increment
+        lift.power = 1.0
     }
 
     fun openClaw() {

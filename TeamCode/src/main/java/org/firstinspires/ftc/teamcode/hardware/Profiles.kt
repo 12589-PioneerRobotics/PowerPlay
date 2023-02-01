@@ -27,10 +27,16 @@ class Profiles () {
         }
     }
 
-    fun experimentalProfile(lift: Lift, stick_right_button: Boolean, bumper_left: Boolean, bumper_right: Boolean, trigger_left: Float, trigger_right: Float) {
+    fun experimentalProfile(lift: Lift, stick_right_button: Boolean, bumper_left: Boolean, bumper_right: Boolean, trigger_left: Float, trigger_right: Float, x: Boolean) {
         if (stick_right_button && lift.clawState == Lift.ClawState.OPEN) {
             lift.closeClaw()
         }
+
+//        if (x) {
+//            lift.lowerLift(80)
+//            lift.openClaw()
+//            lift.setLiftPosition(ActuationConstants.LiftConstants.IDLE)
+//        }
 
         else if (stick_right_button && lift.clawState == Lift.ClawState.CLOSED) {
             lift.openClaw()
@@ -45,7 +51,7 @@ class Profiles () {
             check = true
         }
 
-        if (trigger_right > 0.5)
+        if (trigger_right > 0.5 && lift.lift.currentPosition < 5500)
             lift.raiseLift(ActuationConstants.LiftConstants.LIFT_INCREMENT)
         if (trigger_left > 0.5)
             lift.lowerLift(ActuationConstants.LiftConstants.LIFT_INCREMENT)
