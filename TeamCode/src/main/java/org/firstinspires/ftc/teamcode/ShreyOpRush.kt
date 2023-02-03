@@ -22,7 +22,6 @@ class ShreyOpRush : OpMode() {
 
     override fun init() {
         drive = SampleMecanumDrive(hardwareMap)
-        drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER)
         lift = Lift(hardwareMap)
         profiles = Profiles()
         gamepadEvent1 = GamepadEventPS(gamepad1)

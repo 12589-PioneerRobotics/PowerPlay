@@ -24,17 +24,10 @@ class Lift (hardwareMap: HardwareMap) {
             claw.position = ActuationConstants.ClawConstants.OPEN
             clawState = ClawState.OPEN
         }
-
-//        if (hardwareMap.servo.contains("armLeft")) {
-//            armLeft = hardwareMap.servo.get("armLeft")
-//        }
-//        if (hardwareMap.servo.contains("armRight")) {
-//            armRight = hardwareMap.servo.get("armRight")
-//        }
     }
 
     fun setLiftPosition(position: Int) {
-        if (position < lift.targetPosition)
+        if (lift.targetPosition < lift.currentPosition)
             lift.power = 0.5
         lift.targetPosition = position
         lift.power = 1.0
@@ -53,6 +46,7 @@ class Lift (hardwareMap: HardwareMap) {
     fun openClaw() {
         clawState = ClawState.OPEN
         claw.position = ActuationConstants.ClawConstants.OPEN
+        raiseLift(ActuationConstants.LiftConstants.LIFT_INCREMENT * 3)
     }
 
     fun closeClaw() {
